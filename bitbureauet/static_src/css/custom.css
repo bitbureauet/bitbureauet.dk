@@ -1,0 +1,103 @@
+
+body {
+    padding-top: 65px;
+    padding-bottom: 20px;
+    font-family: "Lato", sans;
+    font-weight: 400;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: "Lato", sans;
+    font-weight: 300;
+    color: #d80d4f;
+}
+
+.jumbotron {
+    font-weight: 300;
+}
+
+.navbar-fixed-top {
+    position: absolute;
+}
+
+.navbar {
+    padding-top: 10px;
+    background-color: #fff;
+
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.175);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.175);
+}
+
+.navbar-nav>li>a {
+    padding-top: 24px;
+    padding-bottom: 15px;
+    color: #222;
+}
+
+.bblogo {
+    padding-top: 10px;
+    padding-left: 5px;
+    width: 165px; 
+}
+
+
+.nav>li>a:hover, 
+.nav>li>a:focus, 
+.nav .open>a, 
+.nav .open>a:hover, 
+.nav .open>a:focus {
+    background-color: transparent;
+}
+
+.nav .caret {
+    border-top-color: #d80d4f;
+    border-bottom-color: #d80d4f;
+    color: #d80d4f;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #d80d4f;
+}
+
+.navbar-toggle{
+    padding: 13px 0px;
+}
+
+.container>.navbar-header, .container>.navbar-collapse {
+    margin-right: 0px;
+    margin-left: 0px;
+    height: 60px;
+}
+
+.jumbotron {
+    background-image: url(/static/images/anim.gif);
+    background-size: cover;
+    padding: 0px;
+}
+
+.innerjumbo{
+    background-color: rgba(255,255,255,0.8);
+    padding: 30px;
+}
+
+
+
+@media (min-width: 768px){
+
+    .navbar-fixed-top {
+        position: fixed;
+    }
+
+    .bblogo {
+        padding: 0px;
+        width: 247px; 
+        height: 51px;
+    }
+    
+    .innerjumbo {
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+
+}
+

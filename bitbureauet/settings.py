@@ -87,3 +87,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(os.path.dirname(__file__), 'static_src'),
 )
+
+TEMPLATE_DIRS = {
+    os.path.join(os.path.dirname(__file__), 'templates')
+}
