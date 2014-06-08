@@ -56,6 +56,8 @@
       </div>
     </div>
 
+    {% block content %}
+
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron"><div class="innerjumbo">
       <div class="container">
@@ -85,6 +87,8 @@
         </div>
       </div>
 
+      {% endblock %}
+
       <hr>
 
       <footer>
@@ -94,5 +98,8 @@
 
     <script src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    {% block javascript %}
+    {% endblock %}
   </body>
 </html>
