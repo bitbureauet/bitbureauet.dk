@@ -14,13 +14,3 @@ class PostList(ListView):
 class PostDetail(DetailView):
     model = models.Post
     template_name = 'blog/post_detail.html'
-
-
-class PostCreate(CreateView):
-    model = models.Post
-    template_name = 'blog/post_form.html'
-
-
-class PostUpdate(UpdateView):
-    model = models.Post
-    template_name = 'blog/post_form.html'

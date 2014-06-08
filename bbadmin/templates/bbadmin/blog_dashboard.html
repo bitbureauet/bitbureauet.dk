@@ -1,0 +1,58 @@
+{% extends "bbadmin/admin_base.html" %}
+
+{% block admin_content %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <a href="{% url 'bbadmin:post-create' %}"
+               class="btn btn-primary pull-right">
+                New post
+            </a>
+        </div>
+    </div>
+    <table class="table table-bordered" style="margin-top: 15px">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                <th>
+                    Published?
+                <th>
+                    Actions
+                <th>
+                    Created
+
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>
+                    {{ post }}
+
+                <td>
+                    {% if post.published %}
+                        <span class="glyphicon glyphicon-ok"></span>
+                    {% else %}
+                        <span class="glyphicon glyphicon-remove"></span>
+                    {% endif %}
+
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-default"
+                           href="{% url 'bbadmin:post-update' post.slug %}">Edit</a>
+
+                        {% if post.published %}
+                            <a class="btn btn-danger"
+                               href="">Unpublish</a>
+                        {% else %}
+                            <a class="btn btn-default"
+                               href="">Publish</a>
+                        {% endif %}
+                    </div>
+
+                <td>
+                    Created: {{ post.created_at|date:'y-m-d h:i' }}<br />
+                    {% if post.created_at != post.updated_at %}
+                    Updated: {{ post.updated_at|date:'y-m-d h:i' }}
+                    {% endif %}
+        {% endfor %}
+    </table>
+{% endblock %}

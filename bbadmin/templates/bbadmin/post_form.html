@@ -1,0 +1,59 @@
+{% extends 'bbadmin/admin_base.html' %}
+{% load staticfiles %}
+
+{% block admin_content %}
+    <div class="row">
+
+            <div id="edit">
+                <form method="post">{% csrf_token %}
+                    <input type="text"
+                           id="id_title"
+                           name="title"
+                           value="{{ post.title }}"/>
+
+                    <textarea id="id_body"
+                              name="body">{{ post.body }}</textarea>
+
+                    <label for="id_published">Published?:</label>
+                    <input type="checkbox"
+                           id="id_published"
+                           name="published"
+                           checked="{{ post.published }}"/>
+
+                    <br />
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </form>
+            </div>
+
+            <div id="preview">
+                <h2 id="title-preview"></h2>
+                <p id="body-preview"></p>
+            </div>
+
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'js/markdown.min.js' %}"></script>
+
+    <script>
+        $(document).ready(function () {
+            var title_input = $('#id_title');
+            var body_input = $('#id_body');
+            var title_preview = $('#title-preview');
+            var body_preview = $('#body-preview');
+
+            title_preview.html(title_input.val());
+            body_preview.html(markdown.toHTML(body_input.val()));
+
+            title_input.keyup(function () {
+                title_preview.html(this.value);
+            });
+
+            body_input.keyup(function () {
+                body_preview.html(markdown.toHTML(this.value));
+            });
+        });
+    </script>
+{% endblock %}
