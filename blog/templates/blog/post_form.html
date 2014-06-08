@@ -1,0 +1,19 @@
+{% load staticfiles %}
+
+<form method="post">{% csrf_token %}
+    {{ form }}
+    <button type="submit">Save</button>
+</form>
+
+<p id="preview"></p>
+
+<script src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
+<script src="{% static 'js/markdown.min.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#id_body').keyup(function() {
+            $('#preview').html(markdown.toHTML(this.value));
+        });
+    });
+</script>
