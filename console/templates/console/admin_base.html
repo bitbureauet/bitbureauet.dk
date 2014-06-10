@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row" style="margin-top: 50px">
+        <div class="col-lg-2">
+            <a href="{% url 'console:blog' %}">Blog</a>
+        </div>
+
+        <div class="col-lg-10">
+            {% block admin_content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

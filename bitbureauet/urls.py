@@ -14,11 +14,11 @@ urlpatterns = patterns('',
         )
     ),
 
-    url(r'^admin/',
+    url(r'^console/',
         include(
-            'bbadmin.urls',
-            namespace='bbadmin',
-            app_name='bbadmin'
+            'console.urls',
+            namespace='console',
+            app_name='console'
         )
     ),
 
