@@ -1,2 +1,3 @@
 git+https://github.com/django/django@stable/1.7.x#egg=Django
 markdown
+django-environ

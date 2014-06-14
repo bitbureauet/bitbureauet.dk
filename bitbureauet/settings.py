@@ -1,34 +1,17 @@
-"""
-Django settings for bitbureauet project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/dev/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/dev/ref/settings/
-"""
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import environ
+
+env = environ.Env(DEBUG=(bool, False),)
+environ.Env.read_env()
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+SECRET_KEY = env('SECRET_KEY')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'at19oj)s3r3vkcu&h0%i%dphfbair6@f!$g8_-5(vlked0sw6)'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = []
-
+DEBUG = env('DEBUG') # False if not in os.environ
+TEMPLATE_DEBUG = DEBUG
 
 # Application definition
-
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,7 +20,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'core',
+    'core'
     'blog',
     'console',
 )
@@ -56,19 +39,9 @@ ROOT_URLCONF = 'bitbureauet.urls'
 
 WSGI_APPLICATION = 'bitbureauet.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/dev/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': env.db(), # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
 }
-
-# Internationalization
-# https://docs.djangoproject.com/en/dev/topics/i18n/
 
 LANGUAGE_CODE = 'da-dk'
 
@@ -79,10 +52,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
 
