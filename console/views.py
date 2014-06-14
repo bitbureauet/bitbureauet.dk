@@ -17,22 +17,20 @@ class BlogDashboard(ListView):
     context_object_name = 'posts'
 
 
-class PostCreate(CreateView):
+class BlogPostMixin:
     model = blog_models.Post
-    template_name = 'console/post_form.html'
     context_object_name = 'post'
 
     def get_success_url(self):
         return reverse('console:blog')
 
 
-class PostUpdate(UpdateView):
-    model = blog_models.Post
+class PostCreate(BlogPostMixin, CreateView):
     template_name = 'console/post_form.html'
-    context_object_name = 'post'
 
-    def get_success_url(self):
-        return reverse('console:blog')
+
+class PostUpdate(BlogPostMixin, UpdateView):
+    template_name = 'console/post_form.html'
 
 
 class PostPublish(View):
