@@ -11,6 +11,8 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG') # False if not in os.environ
 TEMPLATE_DEBUG = DEBUG
 
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+
 # Application definition
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -54,6 +56,8 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
     os.path.join(os.path.dirname(__file__), 'static_src'),
