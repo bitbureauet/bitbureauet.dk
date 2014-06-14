@@ -6,14 +6,6 @@ from core.views import FrontPage
 
 urlpatterns = patterns('',
 
-    url(r'',
-        include(
-            'pages.urls',
-            namespace='pages',
-            app_name='pages'
-        )
-    ),
-
     url(r'^$', FrontPage.as_view()),
 
     url(r'^blog/',
@@ -29,6 +21,14 @@ urlpatterns = patterns('',
             'console.urls',
             namespace='console',
             app_name='console'
+        )
+    ),
+
+    url(r'',
+        include(
+            'pages.urls',
+            namespace='pages',
+            app_name='pages'
         )
     ),
 
