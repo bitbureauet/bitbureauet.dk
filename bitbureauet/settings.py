@@ -37,8 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'console',
+    'core',
     'blog',
+    'console',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -71,7 +72,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'da-dk'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Copenhagen'
 
 USE_I18N = True
 
