@@ -4,7 +4,14 @@
 
     <div class="row" style="margin-top: 50px">
         <div class="col-lg-2">
-            <a href="{% url 'console:blog' %}">Blog</a>
+            <ul class="nav nav-pills nav-stacked">
+                <li>
+                    <a href="{% url 'console:blog' %}">Blog</a>
+                </li>
+                <li>
+                    <a href="{% url 'console:pages' %}">Pages</a>
+                </li>
+            </ul>
         </div>
 
         <div class="col-lg-10">

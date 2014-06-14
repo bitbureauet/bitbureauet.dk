@@ -3,8 +3,11 @@ from django.views.generic import (
     CreateView, UpdateView, TemplateView, ListView,
     View
 )
+from django.contrib.flatpages.models import FlatPage
 
 from blog import models as blog_models
+from pages import models as page_models
+
 
 
 class Dashboard(TemplateView):
@@ -17,25 +20,41 @@ class BlogDashboard(ListView):
     context_object_name = 'posts'
 
 
-class BlogPostMixin:
+class BlogPostEditMixin:
     model = blog_models.Post
     context_object_name = 'post'
+    template_name = 'console/post_form.html'
 
     def get_success_url(self):
         return reverse('console:blog')
 
 
-class PostCreate(BlogPostMixin, CreateView):
-    template_name = 'console/post_form.html'
+class PostCreate(BlogPostEditMixin, CreateView):
+    pass
 
 
-class PostUpdate(BlogPostMixin, UpdateView):
-    template_name = 'console/post_form.html'
+class PostUpdate(BlogPostEditMixin, UpdateView):
+    pass
 
 
-class PostPublish(View):
+class PagesDashboard(ListView):
+    queryset = page_models.Page.objects.all()
+    template_name = 'console/pages_dashboard.html'
+    context_object_name = 'pages'
 
-    def dispatch(self, *args, **kwargs):
-        pass
+
+class PageEditMixin:
+    model = page_models.Page
+    context_object_name = 'page'
+    template_name = 'console/page_form.html'
+
+    def get_success_url(self):
+        return reverse('console:pages')
 
 
+class PageCreate(PageEditMixin, CreateView):
+    pass
+
+
+class PageUpdate(PageEditMixin, UpdateView):
+    pass

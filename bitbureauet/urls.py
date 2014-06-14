@@ -5,6 +5,15 @@ from core.views import FrontPage
 
 
 urlpatterns = patterns('',
+
+    url(r'',
+        include(
+            'pages.urls',
+            namespace='pages',
+            app_name='pages'
+        )
+    ),
+
     url(r'^$', FrontPage.as_view()),
 
     url(r'^blog/',

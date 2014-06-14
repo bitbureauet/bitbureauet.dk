@@ -4,6 +4,12 @@
 {% block admin_content %}
     <div class="row">
 
+        {% if post.id %}
+            <a class="btn btn-default"
+               href="{% url 'blog:post-detail' post.slug %}">
+                <span class="glyphicon glyphicon-eye-open"></span> View</a>
+        {% endif %}
+
         <div id="edit">
             <form method="post">{% csrf_token %}
                 <input type="text"

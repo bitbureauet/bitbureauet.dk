@@ -1,11 +1,11 @@
-{% extends "console/admin_base.html" %}
+{% extends 'console/admin_base.html' %}
 
 {% block admin_content %}
     <div class="panel panel-default">
         <div class="panel-body">
-            <a href="{% url 'console:post-create' %}"
+            <a href="{% url 'console:page-create' %}"
                class="btn btn-primary pull-right">
-                New post
+                New page
             </a>
         </div>
     </div>
@@ -18,17 +18,14 @@
                 Published?
             <th>
                 Actions
-            <th>
-                Created
         </thead>
         <tbody>
-        {% for post in posts %}
+        {% for page in pages %}
             <tr>
             <td>
-                {{ post }}
-
+                {{ page.title }}
             <td>
-                {% if post.published %}
+                {% if page.registration_required %}
                     <span class="glyphicon glyphicon-ok"></span>
                 {% else %}
                     <span class="glyphicon glyphicon-remove"></span>
@@ -37,7 +34,7 @@
             <td>
                 <div class="btn-group">
                     <a class="btn btn-default"
-                       href="{% url 'console:post-update' post.slug %}">
+                       href="{% url 'console:page-update' page.slug %}">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                     </a>
 
@@ -52,16 +49,10 @@
                     {% endcomment %}
 
                     <a class="btn btn-default"
-                       href="{% url 'blog:post-detail' post.slug %}">
-                       <span class="glyphicon glyphicon-eye-open"></span> View
+                       href="{% url 'pages:page-detail' page.slug %}">
+                        <span class="glyphicon glyphicon-eye-open"></span> View
                     </a>
                 </div>
-
-            <td>
-            Created: {{ post.created_at|date:'y-m-d h:i' }}<br/>
-            {% if post.created_at != post.updated_at %}
-                Updated: {{ post.updated_at|date:'y-m-d h:i' }}
-            {% endif %}
         {% endfor %}
     </table>
 {% endblock %}

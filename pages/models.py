@@ -1,17 +1,13 @@
-from django.db import models
 from django.core.urlresolvers import reverse
+from django.db import models
 from django.utils.text import slugify
-import markdown
 
 from core import mixins
 
 
-class Post(mixins.MarkdownMixin, models.Model):
+class Page(mixins.MarkdownMixin, models.Model):
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
-
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=50)
 
     slug = models.SlugField(editable=False)
 
@@ -23,7 +19,7 @@ class Post(mixins.MarkdownMixin, models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:post-detail', kwargs={'slug': self.slug})
+        return reverse('page:page-detail', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
