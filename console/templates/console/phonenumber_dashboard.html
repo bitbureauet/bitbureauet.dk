@@ -13,23 +13,23 @@
                 Current?
         </thead>
         <tbody>
-        {% for number in phone_numbers %}
+        {% for profile in profiles %}
             <tr>
             <td>
-                {{ number.user }}
+                {{ profile }}
             <td>
-                {{ number.number }}
+                {{ profile.phone_number }}
             <td>
-                {% if number.current %}
-                    <button class="btn btn-default" disabled>
-                        <span class="glyphicon glyphicon-ok"></span> Active
-                    </button>
-                {% else %}
+            {% if profile.on_call %}
+                <button class="btn btn-default" disabled>
+                    <span class="glyphicon glyphicon-ok"></span> Active
+                </button>
+            {% else %}
                 <a class="btn btn-default"
-                   href="{% url 'console:phone-numbers-activate' number.number %}">
+                   href="{% url 'console:phone-numbers-activate' profile.phone_number %}">
                     <span class="glyphicon glyphicon-edit"></span> Activate
                 </a>
-                {% endif %}
+            {% endif %}
         {% endfor %}
     </table>
 

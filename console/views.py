@@ -6,7 +6,8 @@ from django.views.generic import (
 
 from blog import models as blog_models
 from pages import models as page_models
-from call import models as call_models
+
+from core import models as core_models
 from core import mixins
 
 
@@ -66,9 +67,10 @@ class PageUpdate(mixins.LoginRequiredMixin, PageEditMixin, UpdateView):
 
 
 class PhoneNumbersList(ListView):
-    queryset = call_models.PhoneNumber.objects.all().order_by('user__username')
+    queryset = core_models.Profile.objects.filter(
+        phone_number__isnull=False).order_by('username')
     template_name = 'console/phonenumber_dashboard.html'
-    context_object_name = 'phone_numbers'
+    context_object_name = 'profiles'
 
 
 class PhoneNumbersActivate(View):
@@ -78,7 +80,7 @@ class PhoneNumbersActivate(View):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request):
-        number = call_models.PhoneNumber.objects.get(number=self.number)
-        number.activate()
+        profile = core_models.Profile.objects.get(phone_number=self.number)
+        profile.put_on_call()
         return redirect('console:phone-numbers')
 

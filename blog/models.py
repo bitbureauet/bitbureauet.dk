@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.text import slugify
 
@@ -19,7 +20,7 @@ class Post(mixins.MarkdownMixin, models.Model):
     published = models.BooleanField(default=False)
 
     edited_by = models.ManyToManyField(
-        'auth.User',
+        settings.AUTH_USER_MODEL,
         editable=False,
     )
 

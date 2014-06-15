@@ -1,8 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-from core.views import FrontPage
-from call.views import CallEndpoint
+from core.views import FrontPage, CallEndpoint
 
 
 urlpatterns = patterns(
