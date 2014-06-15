@@ -68,12 +68,6 @@ h1, h2, h3, h4, h5 {
     height: 60px;
 }
 
-.jumbotron {
-    background-image: url(/static/images/anim.gif);
-    background-size: cover;
-    padding: 0;
-}
-
 .innerjumbo {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 30px;
@@ -97,6 +91,37 @@ h1, h2, h3, h4, h5 {
     }
 
 }
+
+
+.textpage {
+    padding-top: 25px;
+}
+
+.textpage > h1 {
+    padding-bottom: 20px;
+}
+
+.textpage .column {
+    float: left;
+    width: 33%;
+    padding-bottom: 20px;
+    min-width: 200px;
+}
+
+.textpage .clear {
+    clear: both;
+}
+
+.textpage .contactattention {
+    border: 1px solid #d80d4f;
+    border-radius: 7px;
+    padding: 20px;
+    margin-right: 40px;
+    display: inline-block;
+}
+
+
+/* FIXME: please move to console.css */
 
 #id_title, #id_body {
     background-color: white;
