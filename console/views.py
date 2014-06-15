@@ -1,20 +1,18 @@
 from django.core.urlresolvers import reverse
 from django.views.generic import (
     CreateView, UpdateView, TemplateView, ListView,
-    View
 )
-from django.contrib.flatpages.models import FlatPage
 
 from blog import models as blog_models
 from pages import models as page_models
+from core import mixins
 
 
-
-class Dashboard(TemplateView):
+class Dashboard(mixins.LoginRequiredMixin, TemplateView):
     template_name = 'console/dashboard.html'
 
 
-class BlogDashboard(ListView):
+class BlogDashboard(mixins.LoginRequiredMixin, ListView):
     queryset = blog_models.Post.objects.all()
     template_name = 'console/blog_dashboard.html'
     context_object_name = 'posts'
@@ -29,15 +27,15 @@ class BlogPostEditMixin:
         return reverse('console:blog')
 
 
-class PostCreate(BlogPostEditMixin, CreateView):
+class PostCreate(mixins.LoginRequiredMixin, BlogPostEditMixin, CreateView):
     pass
 
 
-class PostUpdate(BlogPostEditMixin, UpdateView):
+class PostUpdate(mixins.LoginRequiredMixin, BlogPostEditMixin, UpdateView):
     pass
 
 
-class PagesDashboard(ListView):
+class PagesDashboard(mixins.LoginRequiredMixin, ListView):
     queryset = page_models.Page.objects.all()
     template_name = 'console/pages_dashboard.html'
     context_object_name = 'pages'
@@ -52,9 +50,9 @@ class PageEditMixin:
         return reverse('console:pages')
 
 
-class PageCreate(PageEditMixin, CreateView):
+class PageCreate(mixins.LoginRequiredMixin, PageEditMixin, CreateView):
     pass
 
 
-class PageUpdate(PageEditMixin, UpdateView):
+class PageUpdate(mixins.LoginRequiredMixin, PageEditMixin, UpdateView):
     pass
