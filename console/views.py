@@ -26,6 +26,11 @@ class BlogPostEditMixin:
     def get_success_url(self):
         return reverse('console:blog')
 
+    def form_valid(self, form):
+        form.instance.edited_by.add(self.request.user)
+
+        return super().form_valid(form)
+
 
 class PostCreate(mixins.LoginRequiredMixin, BlogPostEditMixin, CreateView):
     pass
@@ -52,7 +57,6 @@ class PageEditMixin:
 
 class PageCreate(mixins.LoginRequiredMixin, PageEditMixin, CreateView):
     pass
-
 
 class PageUpdate(mixins.LoginRequiredMixin, PageEditMixin, UpdateView):
     pass

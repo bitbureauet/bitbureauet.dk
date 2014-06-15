@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.text import slugify
-import markdown
 
 from core import mixins
 
@@ -18,6 +17,11 @@ class Post(mixins.MarkdownMixin, models.Model):
     body = models.TextField()
 
     published = models.BooleanField(default=False)
+
+    edited_by = models.ManyToManyField(
+        'auth.User',
+        editable=False,
+    )
 
     def __str__(self):
         return self.title

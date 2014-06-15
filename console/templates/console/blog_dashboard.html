@@ -19,6 +19,8 @@
             <th>
                 Actions
             <th>
+                Authors
+            <th>
                 Created
         </thead>
         <tbody>
@@ -58,10 +60,14 @@
                 </div>
 
             <td>
-            Created: {{ post.created_at|date:'y-m-d h:i' }}<br/>
-            {% if post.created_at != post.updated_at %}
-                Updated: {{ post.updated_at|date:'y-m-d h:i' }}
-            {% endif %}
+                {% for author in post.edited_by.all %}
+                    {{ author }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            <td>
+                Created: {{ post.created_at|date:'y-m-d h:i' }}<br/>
+                {% if post.created_at != post.updated_at %}
+                    Updated: {{ post.updated_at|date:'y-m-d h:i' }}
+                {% endif %}
         {% endfor %}
     </table>
 {% endblock %}
