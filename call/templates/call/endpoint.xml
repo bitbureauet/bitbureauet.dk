@@ -1,0 +1,5 @@
+{% load staticfiles %}
+<?xml version="1.0" encoding="UTF-8" ?><Response>
+    <Play>{% static 'vent.wav' %}</Play>
+    <Dial>+45{{ number }}</Dial>
+</Response>

@@ -26,6 +26,7 @@ INSTALLED_APPS = (
     'core',
     'blog',
     'pages',
+    'call',
     'console',
 
     'allauth',

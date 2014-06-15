@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
 from core.views import FrontPage
+from call.views import CallEndpoint
 
 
 urlpatterns = patterns(
@@ -29,6 +30,8 @@ urlpatterns = patterns(
             app_name='console'
         )
     ),
+
+    url(r'^call/', CallEndpoint.as_view()),
 
     url(r'^django_admin/', include(admin.site.urls)),
 

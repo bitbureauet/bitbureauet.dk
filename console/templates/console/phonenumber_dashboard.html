@@ -1,0 +1,37 @@
+{% extends 'console/admin_base.html' %}
+
+{% block admin_content %}
+
+    <table class="table table-bordered" style="margin-top: 15px">
+        <thead>
+        <tr>
+            <th>
+                User
+            <th>
+                Number
+            <th>
+                Current?
+            <th>
+                Actions
+        </thead>
+        <tbody>
+        {% for number in phone_numbers %}
+            <tr>
+            <td>
+                {{ number.user }}
+            <td>
+                {{ number.number }}
+            <td>
+                {{ number.current }}
+
+            <td>
+            <div class="btn-group">
+                <a class="btn btn-default"
+                   href="{% url 'console:phone-numbers-activate' number.number %}">
+                    <span class="glyphicon glyphicon-edit"></span> Activate
+                </a>
+            </div>
+        {% endfor %}
+    </table>
+
+{% endblock %}

@@ -1,10 +1,12 @@
 from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
 from django.views.generic import (
     CreateView, UpdateView, TemplateView, ListView,
-)
+    View)
 
 from blog import models as blog_models
 from pages import models as page_models
+from call import models as call_models
 from core import mixins
 
 
@@ -58,5 +60,25 @@ class PageEditMixin:
 class PageCreate(mixins.LoginRequiredMixin, PageEditMixin, CreateView):
     pass
 
+
 class PageUpdate(mixins.LoginRequiredMixin, PageEditMixin, UpdateView):
     pass
+
+
+class PhoneNumbersList(ListView):
+    queryset = call_models.PhoneNumber.objects.all().order_by('user__username')
+    template_name = 'console/phonenumber_dashboard.html'
+    context_object_name = 'phone_numbers'
+
+
+class PhoneNumbersActivate(View):
+
+    def dispatch(self, request, *args, number, **kwargs):
+        self.number = number
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request):
+        number = call_models.PhoneNumber.objects.get(number=self.number)
+        number.activate()
+        return redirect('console:phone-numbers')
+
