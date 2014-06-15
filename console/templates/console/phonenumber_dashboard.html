@@ -11,8 +11,6 @@
                 Number
             <th>
                 Current?
-            <th>
-                Actions
         </thead>
         <tbody>
         {% for number in phone_numbers %}
@@ -22,15 +20,16 @@
             <td>
                 {{ number.number }}
             <td>
-                {{ number.current }}
-
-            <td>
-            <div class="btn-group">
+                {% if number.current %}
+                    <button class="btn btn-default" disabled>
+                        <span class="glyphicon glyphicon-ok"></span> Active
+                    </button>
+                {% else %}
                 <a class="btn btn-default"
                    href="{% url 'console:phone-numbers-activate' number.number %}">
                     <span class="glyphicon glyphicon-edit"></span> Activate
                 </a>
-            </div>
+                {% endif %}
         {% endfor %}
     </table>
 
