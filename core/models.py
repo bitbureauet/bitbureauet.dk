@@ -21,13 +21,13 @@ class Profile(AbstractUser):
         editable=False,
     )
 
-    def save(self, **kwargs):
+    def save(self, *args, **kwargs):
         if self.on_call:
             # If we are saving with on_call set then we
             # have to set the profile currently on call to off call
             Profile.objects.filter(on_call=True).update(on_call=False)
 
-        super().save(**kwargs)
+        super().save(*args, **kwargs)
 
     @atomic
     def put_on_call(self):

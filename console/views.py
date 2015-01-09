@@ -30,6 +30,7 @@ class BlogPostEditMixin:
         return reverse('console:blog')
 
     def form_valid(self, form):
+        form.save()
         form.instance.edited_by.add(self.request.user)
 
         return super().form_valid(form)
