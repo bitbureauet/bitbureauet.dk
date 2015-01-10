@@ -3,3 +3,4 @@ markdown
 django-environ
 django-allauth
 django-extensions
+django-sekizai

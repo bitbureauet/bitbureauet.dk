@@ -30,6 +30,7 @@ INSTALLED_APPS = (
 
     'allauth',
     'allauth.account',
+    'sekizai',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -52,6 +53,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'allauth.account.context_processors.account',
+    'sekizai.context_processors.sekizai',
 )
 
 AUTHENTICATION_BACKENDS = (
