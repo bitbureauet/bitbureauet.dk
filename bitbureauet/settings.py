@@ -94,5 +94,3 @@ SITE_ID = 1
 ACCOUNT_ADAPTER = 'core.account_adapter.NoSignupAdapter'
 
 LOGIN_REDIRECT_URL = 'console:dashboard'
-
-AUTH_USER_MODEL = 'core.Profile'

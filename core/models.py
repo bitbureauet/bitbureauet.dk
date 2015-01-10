@@ -1,9 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.db.transaction import atomic
 
 
-class Profile(AbstractUser):
+class Profile(models.Model):
+
+    user = models.OneToOneField('auth.User')
 
     phone_number = models.IntegerField(
         null=True,

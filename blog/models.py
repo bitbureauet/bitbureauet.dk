@@ -19,10 +19,10 @@ class Post(mixins.MarkdownMixin, models.Model):
 
     published = models.BooleanField(default=False)
 
-    edited_by = models.ManyToManyField(
-        settings.AUTH_USER_MODEL,
-        editable=False,
-    )
+    edited_by = models.ManyToManyField('auth.User', editable=False)
+
+    class Meta:
+        ordering = ('-created_at',)
 
     def __str__(self):
         return self.title

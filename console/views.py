@@ -69,7 +69,7 @@ class PageUpdate(mixins.LoginRequiredMixin, PageEditMixin, UpdateView):
 
 class PhoneNumbersList(ListView):
     queryset = core_models.Profile.objects.filter(
-        phone_number__isnull=False).order_by('username')
+        phone_number__isnull=False).order_by('user__username')
     template_name = 'console/phonenumber_dashboard.html'
     context_object_name = 'profiles'
 
