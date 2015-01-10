@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 from django.utils.text import slugify
 
 from django_extensions.db.fields import AutoSlugField
@@ -16,14 +17,17 @@ class Post(mixins.MarkdownMixin, models.Model):
 
     slug = AutoSlugField(populate_from='title')
 
+    teaser = models.TextField(null=True, blank=True)
+
     body = models.TextField()
 
     published = models.BooleanField(default=False)
+    published_at = models.DateTimeField(null=True, blank=True)
 
     edited_by = models.ManyToManyField('auth.User', editable=False)
 
     class Meta:
-        ordering = ('-created_at',)
+        ordering = ('-created_at', '-published_at')
 
     def __str__(self):
         return self.title
@@ -33,4 +37,6 @@ class Post(mixins.MarkdownMixin, models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
+        if self.published and not self.published_at:
+            self.published_at = timezone.now()
         super().save(*args, **kwargs)
