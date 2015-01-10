@@ -20,6 +20,18 @@ class BlogDashboard(mixins.LoginRequiredMixin, ListView):
     template_name = 'console/blog_dashboard.html'
     context_object_name = 'posts'
 
+    def get_queryset(self):
+        query = super().get_queryset()
+        term = self.request.GET.get('term', None)
+        if term:
+            query = query.filter(title__icontains=term)
+
+        _filter = self.request.GET.get('filter', None)
+        if _filter == 'drafts':
+            query = query.filter(published=False)
+
+        return query
+
 
 class BlogPostEditMixin:
     model = blog_models.Post

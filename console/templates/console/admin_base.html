@@ -3,26 +3,29 @@
 
 {% block content %}
 
-    <div class="row">
-        <div class="col-md-2">
-            <ul class="nav nav-pills nav-stacked">
-                <li>
-                    <a href="{% url 'console:blog' %}">Blog</a>
-                </li>
-                <li>
-                    <a href="{% url 'console:pages' %}">Pages</a>
-                </li>
-                <li>
-                    <a href="{% url 'console:phone-numbers' %}">Call</a>
-                </li>
-                <li>
-                    <a href="{% url 'account_logout' %}">Logout</a>
-                </li>
-            </ul>
-        </div>
+{% addtoblock 'css' %}
+    <link href="{% static 'css/console.css' %}" rel="stylesheet" />
+{% endaddtoblock %}
 
-        <div class="col-md-10">
-            {% block admin_content %}{% endblock %}
-        </div>
-    </div>
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-pills nav-justified">
+      <li class="{% is_active 'console:dashboard' %}">
+        <a href="{% url 'console:dashboard' %}">Dashboard</a>
+      </li>
+      <li class="{% is_active 'console:blog' %}">
+        <a href="{% url 'console:blog' %}">Blog</a>
+      </li>
+      <li class="{% is_active 'console:pages' %}">
+        <a href="{% url 'console:pages' %}">Pages</a>
+      </li>
+      <li class="{% is_active 'console:phone-numbers' %}">
+        <a href="{% url 'console:phone-numbers' %}">Call</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+{% block admin_content %}{% endblock %}
+
 {% endblock %}

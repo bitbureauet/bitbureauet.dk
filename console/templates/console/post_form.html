@@ -2,65 +2,95 @@
 {% load staticfiles sekizai_tags %}
 
 {% block admin_content %}
-    <div class="row">
+<div class="row" style="margin-top: 20px">
+  <div class="col-md-10">
 
-        {% if post.id %}
-            <a class="btn btn-default"
-               href="{% url 'blog:post-detail' post.slug %}">
-                <span class="glyphicon glyphicon-eye-open"></span> View</a>
-        {% endif %}
+    <form method="post">{% csrf_token %}
 
-        <div id="edit">
-            <form method="post">{% csrf_token %}
+      <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist" style="margin-bottom: 10px">
+          <li role="presentation" class="active">
+            <a href="#edit" role="tab" data-toggle="tab">Edit</a>
+          </li>
+          <li role="presentation">
+            <a href="#preview"role="tab" data-toggle="tab">Preview</a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="edit">
+            <div id="edit">
                 <input type="text"
                        id="id_title"
                        name="title"
                        value="{{ post.title }}"/>
 
+                <textarea id="id_teaser"
+                          name="teaser">{{ post.teaser }}</textarea>
+
                 <textarea id="id_body"
                           name="body">{{ post.body }}</textarea>
 
-                <label for="id_published">Published?:</label>
-                <input type="checkbox"
-                       id="id_published"
-                       name="published"
-                       checked="{{ post.published }}"/>
+            </div>
+          </div>
 
-                <br/>
-                <button class="btn btn-primary" type="submit">Save</button>
-            </form>
-        </div>
-
-        <div id="preview">
+          <div role="tabpanel" class="tab-pane" id="preview">
             <h2 id="title-preview"></h2>
-
+            <p id="teaser-preview"></p>
             <p id="body-preview"></p>
+          </div>
         </div>
-
+      </div>
     </div>
+    <div class="col-md-2">
+      <label for="id_published">Published?:</label>
+      <input type="checkbox"
+             id="id_published"
+             name="published"
+             {% if post.published %}checked{% endif %}/>
 
-{% endblock %}
+      <button class="btn btn-primary" style="width: 100%" type="submit">Save</button>
+      <hr />
+      {% if post.id %}
+        <a class="btn btn-default"
+           href="{% url 'blog:post-detail' post.slug %}"
+           style="width:100%"
+          >
+          <span class="glyphicon glyphicon-eye-open"></span> View</a>
+      {% endif %}
+    </div>
+  </form>
+</div>
 
-{% block javascript %}
-    <script src="{% static 'js/markdown.min.js' %}"></script>
+{% addtoblock 'js' %}
+  <script src="{% static 'js/markdown.min.js' %}"></script>
 
-    <script>
-        $(document).ready(function () {
-            var title_input = $('#id_title');
-            var body_input = $('#id_body');
-            var title_preview = $('#title-preview');
-            var body_preview = $('#body-preview');
+  <script>
+    $(document).ready(function () {
+      var title_input = $('#id_title');
+      var teaser_input = $('#id_teaser');
+      var body_input = $('#id_body');
+      var title_preview = $('#title-preview');
+      var teaser_preview = $('#teaser-preview');
+      var body_preview = $('#body-preview');
 
-            title_preview.html(title_input.val());
-            body_preview.html(markdown.toHTML(body_input.val()));
+      title_preview.html(title_input.val());
+      teaser_preview.html(markdown.toHTML(teaser_input.val()));
+      body_preview.html(markdown.toHTML(body_input.val()));
 
-            title_input.keyup(function () {
-                title_preview.html(this.value);
-            });
+      title_input.keyup(function () {
+        title_preview.html(this.value);
+      });
 
-            body_input.keyup(function () {
-                body_preview.html(markdown.toHTML(this.value));
-            });
-        });
-    </script>
+      teaser_input.keyup(function () {
+        teaser_preview.html(markdown.toHTML(this.value));
+      });
+
+      body_input.keyup(function () {
+        body_preview.html(markdown.toHTML(this.value));
+      });
+    });
+  </script>
+{% endaddtoblock %}
+
 {% endblock %}

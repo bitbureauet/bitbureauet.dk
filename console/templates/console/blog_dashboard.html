@@ -1,50 +1,67 @@
-{% extends "console/admin_base.html" %}
+{% extends 'console/admin_base.html' %}
 
 {% block admin_content %}
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <a href="{% url 'console:post-create' %}"
-               class="btn btn-primary pull-right">
-                New post
-            </a>
-        </div>
-    </div>
-    <table class="table table-bordered" style="margin-top: 15px">
-        <thead>
+
+<div class="row" style="margin-top: 20px">
+  <div class="col-md-10">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>
+          Title
+        <th>
+          Status
+        <th>
+          Authors
+        <th>
+          Created
+      </thead>
+      <tbody>
+      {% for post in posts %}
         <tr>
-            <th>
-                Title
-            <th>
-                Status
-            <th>
-                Authors
-            <th>
-                Created
-        </thead>
-        <tbody>
-        {% for post in posts %}
-            <tr>
-            <td>
-              <a href="{% url 'console:post-update' post.slug %}">
-                {{ post }}
-              </a>
-
-            <td>
-                {% if post.published %}
-                  Published
-                {% else %}
-                  Draft
-                {% endif %}
-
-            <td>
-                {% for author in post.edited_by.all %}
-                    {{ author }}{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            <td>
-                Created: {{ post.created_at|date:'Y-m-d H:i' }}<br/>
-                {% if post.created_at != post.updated_at %}
-                    Updated: {{ post.updated_at|date:'Y-m-d H:i' }}
-                {% endif %}
-        {% endfor %}
+        <td>
+          <a href="{% url 'console:post-update' post.slug %}">
+            {{ post }}
+          </a>
+        <td>
+          {% if post.published %}
+            Published
+          {% else %}
+            Draft
+          {% endif %}
+        <td>
+          {% for author in post.edited_by.all %}
+            {{ author }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        <td>
+          Created: {{ post.created_at|date:'Y-m-d H:i' }}<br/>
+          {% if post.created_at != post.updated_at %}
+            Updated: {{ post.updated_at|date:'Y-m-d H:i' }}
+          {% endif %}
+      {% endfor %}
     </table>
+  </div>
+  <div class="col-md-2">
+    <a href="{% url 'console:post-create' %}"
+       class="btn btn-primary"
+       style="width: 100%">
+      New post
+    </a>
+    <hr />
+    <form method="GET" action="">
+      <div class="input-group">
+        <input type="text" class="form-control" name="term" placeholder="Search">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+    <hr />
+    <h4>Filter</h4>
+        <a href="?filter=drafts">Drafts</a>
+  </div>
+</div>
+
 {% endblock %}

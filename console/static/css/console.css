@@ -1,0 +1,30 @@
+
+#id_title, #id_teaser, #id_body {
+    background-color: white;
+    border: 1px solid #eee;
+    font-family: "Lato", sans;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+#id_title {
+    font-size: 24px;
+    font-weight: 300;
+    width: 100%;
+}
+
+#id_teaser {
+    width: 100%;
+    height: 5em;
+}
+
+#teaser-preview {
+    font-weight: bold;
+    resize: vertical;
+}
+
+#id_body {
+    width: 100%;
+    height: 30em;
+    resize: vertical;
+}
