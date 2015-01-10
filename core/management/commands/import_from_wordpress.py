@@ -85,6 +85,8 @@ class Command(BaseCommand):
                 created_at=pub_date,
                 updated_at=pub_date
             )
+            if post.published:
+                post.published_at = pub_date
             post.edited_by.add(creator)
 
             print('Done!')
