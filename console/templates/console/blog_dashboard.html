@@ -15,9 +15,7 @@
             <th>
                 Title
             <th>
-                Published?
-            <th>
-                Actions
+                Status
             <th>
                 Authors
             <th>
@@ -27,46 +25,25 @@
         {% for post in posts %}
             <tr>
             <td>
+              <a href="{% url 'console:post-update' post.slug %}">
                 {{ post }}
+              </a>
 
             <td>
                 {% if post.published %}
-                    <span class="glyphicon glyphicon-ok"></span>
+                  Published
                 {% else %}
-                    <span class="glyphicon glyphicon-remove"></span>
+                  Draft
                 {% endif %}
-
-            <td>
-                <div class="btn-group">
-                    <a class="btn btn-default"
-                       href="{% url 'console:post-update' post.slug %}">
-                        <span class="glyphicon glyphicon-edit"></span> Edit
-                    </a>
-
-                    {% comment %}
-                    {% if post.published %}
-                        <a class="btn btn-danger"
-                           href="">Unpublish</a>
-                    {% else %}
-                        <a class="btn btn-default"
-                           href="">Publish</a>
-                    {% endif %}
-                    {% endcomment %}
-
-                    <a class="btn btn-default"
-                       href="{% url 'blog:post-detail' post.slug %}">
-                       <span class="glyphicon glyphicon-eye-open"></span> View
-                    </a>
-                </div>
 
             <td>
                 {% for author in post.edited_by.all %}
                     {{ author }}{% if not forloop.last %}, {% endif %}
                 {% endfor %}
             <td>
-                Created: {{ post.created_at|date:'y-m-d h:i' }}<br/>
+                Created: {{ post.created_at|date:'Y-m-d H:i' }}<br/>
                 {% if post.created_at != post.updated_at %}
-                    Updated: {{ post.updated_at|date:'y-m-d h:i' }}
+                    Updated: {{ post.updated_at|date:'Y-m-d H:i' }}
                 {% endif %}
         {% endfor %}
     </table>

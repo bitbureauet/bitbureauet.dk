@@ -1,6 +1,6 @@
 
 body {
-    padding-top: 65px;
+    padding-top: 100px;
     padding-bottom: 20px;
     font-family: "Lato", sans;
     font-weight: 400;
@@ -24,8 +24,7 @@ h1, h2, h3, h4, h5 {
     padding-top: 10px;
     background-color: #fff;
 
-    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.175);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.175);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.175);
 }
 
 .navbar-nav > li > a {
