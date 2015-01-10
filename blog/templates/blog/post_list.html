@@ -3,11 +3,35 @@
 
 {% block content %}
     <div class="container">
-        {% for post in posts %}
-          <a href="{% url 'blog:post-detail' post.slug %}">
-          {{ post }}
-          </a>
-          <hr />
-        {% endfor %}
+
+      <div class="row">
+
+        <div class="col-md-8">
+
+          {% for post in posts %}
+            <a href="{% url 'blog:post-detail' post.slug %}">
+              <h3>
+                {{ post }}
+              </h3>
+            </a>
+
+            {{ post.body }}
+
+            <div class="pull-right">
+              <a>
+                <strong>Læs mere</strong>
+              </a>
+            </div>
+            <hr />
+          {% endfor %}
+
+        </div>
+
+        <div class="col-md-4">
+
+        </div>
+
+      </div>
+
     </div>
 {% endblock %}
