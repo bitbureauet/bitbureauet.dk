@@ -2,3 +2,4 @@ django==1.7.2
 markdown
 django-environ
 django-allauth
+django-extensions

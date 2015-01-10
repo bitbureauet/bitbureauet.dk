@@ -1,7 +1,8 @@
 from django.db import models
-from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.text import slugify
+
+from django_extensions.db.fields import AutoSlugField
 
 from core import mixins
 
@@ -13,7 +14,7 @@ class Post(mixins.MarkdownMixin, models.Model):
 
     title = models.CharField(max_length=255)
 
-    slug = models.SlugField(editable=False)
+    slug = AutoSlugField(populate_from='title')
 
     body = models.TextField()
 
