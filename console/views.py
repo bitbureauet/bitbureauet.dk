@@ -49,11 +49,11 @@ class BlogPostEditMixin:
 
 
 class PostCreate(mixins.LoginRequiredMixin, BlogPostEditMixin, CreateView):
-    pass
+    fields = '__all__'
 
 
 class PostUpdate(mixins.LoginRequiredMixin, BlogPostEditMixin, UpdateView):
-    pass
+    fields = '__all__'
 
 
 class PagesDashboard(mixins.LoginRequiredMixin, ListView):
