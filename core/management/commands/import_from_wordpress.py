@@ -16,10 +16,11 @@ class Command(BaseCommand):
         if not args[0]:
             raise CommandError('Need xml file')
 
-        if args[1] == 'delete':
-            print('Flushing all posts ... ', end='')
-            models.Post.objects.all().delete()
-            print('Done!')
+        if len(args) > 1:
+            if args[1] == 'delete':
+                print('Flushing all posts ... ', end='')
+                models.Post.objects.all().delete()
+                print('Done!')
 
         xmldoc = minidom.parse(args[0])
 
