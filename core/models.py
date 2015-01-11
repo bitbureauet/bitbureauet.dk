@@ -1,5 +1,8 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
 from django.db.transaction import atomic
+from django.dispatch import receiver
 
 
 class Profile(models.Model):
@@ -22,6 +25,9 @@ class Profile(models.Model):
         editable=False,
     )
 
+    def __str__(self):
+        return self.user.username
+
     def save(self, *args, **kwargs):
         if self.on_call:
             # If we are saving with on_call set then we
@@ -36,3 +42,9 @@ class Profile(models.Model):
 
         self.on_call = True
         self.save()
+
+
+@receiver(post_save, sender=User)
+def create_profile(instance, raw, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
